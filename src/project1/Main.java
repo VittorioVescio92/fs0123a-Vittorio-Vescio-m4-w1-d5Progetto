@@ -45,6 +45,16 @@ public class Main {
 
 			if (choice > 0 && choice <= 5) {
 				ElementoMultimediale media = medias[choice - 1];
+//				if (media.getFileType().equals("video") || media.getFileType().equals("audio")) {
+//					System.out.println("elemento multimediale selezionato in riproduzione con volume "
+//							+ (media.getVolume())
+//							+ ", se vuoi alzarlo premi +, per abbassarlo premi -, per andare avanti digita '.'");
+//					String volChoice = multimediaScan.nextLine();
+//					if (volChoice.equals("+")) {
+//						media.setVolume(media.getVolume() + 1);
+//					} else if (volChoice.equals("-")) {
+//						media.setVolume(media.getVolume() - 1);
+//					}
 				if (media != null) {
 					media.esegui();
 				} else {

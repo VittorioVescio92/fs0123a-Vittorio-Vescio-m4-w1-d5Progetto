@@ -47,6 +47,16 @@ public class Video extends ElementoMultimediale implements Playable, brightness 
 		this.bright = brightness;
 	}
 
+	public void volumeUp() {
+		volume = Playable.volumeUp(volume);
+		System.out.println("Volume alzato a " + volume);
+	}
+
+	public void volumeDown() {
+		volume = Playable.volumeDown(volume);
+		System.out.println("Volume abbassato a " + volume);
+	}
+
 	@Override
 	public void esegui() {
 		Playable.play(getDuration(), getTitle(), getVolume(), brightness.show(getBrightness()));
