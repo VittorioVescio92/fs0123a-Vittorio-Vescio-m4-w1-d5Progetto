@@ -16,55 +16,63 @@ public class Main {
 		ElementoMultimediale[] medias = new ElementoMultimediale[5];
 
 		for (int i = 0; i < 5; i++) {
-			System.out.println("Inserisci il tipo di file del " + (i + 1) + "° elemento (video, immagine o audio)");
+			System.out.println("L'elemento " + (i + 1) + " sarà un video, audio o immagine?");
 			String mediaType = multimediaScan.nextLine();
 
 			System.out.println("Inserisci il titolo del " + (i + 1) + "° elemento");
 			String mediaTitle = multimediaScan.nextLine();
 
-			if (mediaType.equalsIgnoreCase("video")) {
+			if (mediaType.toLowerCase().equals("video")) {
 				Video video = new Video(mediaType, mediaTitle);
 				medias[i] = video;
-			} else if (mediaType.equalsIgnoreCase("audio")) {
+			} else if (mediaType.toLowerCase().equals("audio")) {
 				AudioRecord audio = new AudioRecord(mediaType, mediaTitle);
 				medias[i] = audio;
-			} else if (mediaType.equalsIgnoreCase("immagine")) {
+			} else if (mediaType.toLowerCase().equals("immagine")) {
 				Immagine immagine = new Immagine(mediaType, mediaTitle);
 				medias[i] = immagine;
 			} else {
-				System.out.println("File non supportato!");
+				System.out.println("Tipo di file non supportato!");
 				i--;
 			}
 		}
 
-		int choice = -1;
-		while (choice != 0) {
-			System.out.println("Inserisci il numero dell'elemento da eseguire (0 per uscire)");
-			choice = multimediaScan.nextInt();
+		int selected = -1;
+		while (selected != 0) {
+			System.out.println("Inserisci il numero dell'elemento da riprodurre (0 per uscire)");
+			selected = multimediaScan.nextInt();
 			multimediaScan.nextLine();
 
-			if (choice > 0 && choice <= 5) {
-				ElementoMultimediale media = medias[choice - 1];
-//				if (media.getFileType().equals("video") || media.getFileType().equals("audio")) {
-//					System.out.println("elemento multimediale selezionato in riproduzione con volume "
-//							+ (media.getVolume())
-//							+ ", se vuoi alzarlo premi +, per abbassarlo premi -, per andare avanti digita '.'");
-//					String volChoice = multimediaScan.nextLine();
-//					if (volChoice.equals("+")) {
-//						media.setVolume(media.getVolume() + 1);
-//					} else if (volChoice.equals("-")) {
-//						media.setVolume(media.getVolume() - 1);
-//					}
-				if (media != null) {
-					media.esegui();
-				} else {
-					System.out.println("Elemento multimediale non presente!");
+			if (selected == 0) {
+				break;
+			} else if (selected > 0 && selected <= 5) {
+				ElementoMultimediale media = medias[selected - 1];
+				if (media instanceof AudioRecord) {
+					System.out.println("A che volume vuoi ascoltarlo? (da 1 a 10)");
+					int volume = multimediaScan.nextInt();
+					multimediaScan.nextLine();
+					((AudioRecord) media).setVolume(volume);
+				} else if (media instanceof Video) {
+					System.out.println("A che volume vuoi ascoltarlo? (da 1 a 10)");
+					int volume = multimediaScan.nextInt();
+					multimediaScan.nextLine();
+					((Video) media).setVolume(volume);
+					System.out.println("A quanto vuoi impostare la luminosità? (da 1 a 10)");
+					int bright = multimediaScan.nextInt();
+					multimediaScan.nextLine();
+					((Video) media).setBrightness(bright);
+				} else if (media instanceof Immagine) {
+					System.out.println("A quanto vuoi ? (da 1 a 10)");
+					int bright = multimediaScan.nextInt();
+					multimediaScan.nextLine();
+					((Immagine) media).setBright(bright);
 				}
-			} else if (choice != 0) {
-				System.out.println("Scelta non valida!");
+				media.esegui();
+			} else {
+				System.out.println("Elemento multimediale non presente!");
 			}
+
 		}
-		System.out.println("Arrivederci e grazie per averci preferito!");
 		multimediaScan.close();
 	}
 }

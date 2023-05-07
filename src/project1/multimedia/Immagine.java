@@ -5,26 +5,26 @@ public class Immagine extends ElementoMultimediale implements brightness {
 
 	public Immagine(String fileType, String title) {
 		super(fileType, title, false);
-		setbright(bright);
+		setBright(bright);
 	}
 
 	public Immagine(String fileType, String title, int bright) {
 		super(fileType, title, false);
-		setbright(bright);
+		setBright(bright);
 
 	}
 
-	public int getbright() {
+	public int getBright() {
 		return bright;
 	}
 
-	public void setbright(int bright) {
+	public void setBright(int bright) {
 		this.bright = bright;
 	}
 
 	@Override
 	public void esegui() {
-		brightness.show(getTitle(), getbright());
+		brightness.show(getTitle(), getBright());
 	};
 
 }

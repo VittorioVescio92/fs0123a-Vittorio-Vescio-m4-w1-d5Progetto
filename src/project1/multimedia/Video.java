@@ -43,8 +43,8 @@ public class Video extends ElementoMultimediale implements Playable, brightness 
 		return bright;
 	}
 
-	public void setBrightness(int brightness) {
-		this.bright = brightness;
+	public void setBrightness(int bright) {
+		this.bright = bright;
 	}
 
 	public void volumeUp() {
